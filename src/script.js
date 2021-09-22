@@ -6,8 +6,8 @@ const authorizationHeaders = {
 };
 
 // SETANDO O BODY DA REQUISIÇÃO
-const number_ip = '123456789'; // gerar esse número na plataforma da NVoip
-const user_token = 'xxxxxxxx'; // gerar esse número na plataforma da NVoip
+const number_ip = '1234567890'; // gerar esse número na plataforma da NVoip
+const user_token = 'xxx'; // gerar esse número na plataforma da NVoip
 
 const credentials = `username=${number_ip}&password=${user_token}&grant_type=password`;
 
@@ -22,6 +22,7 @@ function conectApi() {
     .then((res) => res.json()) //  retorna a resposta da requisição em formato JSON
     .then((data) => {
       access_token = data['access_token']; //  acessa o access_token
+      alert('Conectado com a Nvoip!');
     })
     .catch((error) => console.log(error)); //  caso ocorra um erro na requisição
 }
@@ -31,7 +32,7 @@ function conectApi() {
 function getToken() {
   const options = {
     method: 'POST',
-    headers,
+    headers: { ...defaultHeaders, ...authorizationHeaders },
     body: `token=${access_token}`,
   };
 
